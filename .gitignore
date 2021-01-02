@@ -3,3 +3,4 @@ models/
 nbs/samples/
 __pycache__/
 .ipynb_checkpoints
+.vscode

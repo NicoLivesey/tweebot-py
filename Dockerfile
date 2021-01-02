@@ -8,13 +8,13 @@ WORKDIR /var/task
 
 RUN apt-get update -y
 
-# ADD MODEL DOWNLOAD
-
 COPY requirements/ .
 
 RUN pip install --upgrade pip &&\
-    pip install -r requirements/requirements_runtime.txt
+    pip install -r requirements_runtime.txt
 
-COPY ./app /app
+COPY ./tweebot_py /tweebot_py
 
-CMD ["python", "/app/app.py"]
+RUN bash /tweebot_py/setup/model.sh
+
+CMD ["python", "/tweebot_py/app.py"]
