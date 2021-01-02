@@ -1,4 +1,4 @@
-# TWEEBOT_PY #
+# Tweebot_py #
 
 ### Summary ###
 
@@ -14,24 +14,41 @@ It uses the library https://github.com/minimaxir/gpt-2-simple based on Tensorflo
 
 ### Installation and setup ###
 
-* For dev:
+You can either use Makefile or directly install dependencies by hand
+
+* Make:
+
+Just run and you're good:
+
+```shell
+make init
+```
+
+* By hand:
+
+Run:
+
+```shell
+pip install -r requirements/requirements_runtime.txt
+```
+
+* Docker:
 
 This project is encapsulated in a docker container so you should have **Docker** installed on your environment. For more info check https://docs.docker.com/get-docker/
 
 To build and run the container:
 
 ```shell
-docker build -t api-cv-ads-bbox:latest .
-docker run --name api-cv-ads-bbox --rm -p 80:80 -it api-cv-ads-bbox
+docker build -t tweebot:latest .
+docker run --name tweebot --rm -p 80:80 -it tweebot
 ```
 
 ### Run tests ###
 
-The unit tests are containerized within the app image. To run them just do:
+To run them just do:
 
 ```shell
-docker build -f Dockerfile_tests -t api-cv-ads-bbox-tests:latest .
-docker run -v /path/to/data/folder:/data --name api-cv-ads-bbox-tests --rm -it api-cv-ads-bbox-tests
+make test
 ```
 
 ### Contact ###
