@@ -10,7 +10,7 @@ sess = gpt2.start_tf_sess()
 
 
 @log("Model loading")
-def load_model(model_dir, model):
+def load_model():
     gpt2.load_gpt2(sess, run_name=cfg.DEFAUT_MODEL, checkpoint_dir=cfg.MODEL_DIR)
 
 
