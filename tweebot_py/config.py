@@ -15,7 +15,7 @@ ACCESS_TOKEN_SECRET = os.getenv("ACCESS_TOKEN_SECRET")
 
 PRETRAINED_MODEL = os.getenv("PRETRAINED_MODEL", "romans")
 MODEL_DIR = "models/checkpoint"
-STEPS = os.getenv("STEPS", 500)
-BATCH_SIZE = os.getenv("BATCH_SIZE", 8)
-LEARNING_RATE = os.getenv("LEARNING_RATE", 1e-4)
-TEMPERATURE = os.getenv("TEMPERATURE", 0.8)
+STEPS = int(os.getenv("STEPS", 500))
+BATCH_SIZE = int(os.getenv("BATCH_SIZE", 8))
+LEARNING_RATE = float(os.getenv("LEARNING_RATE", 1e-4))
+TEMPERATURE = float(os.getenv("TEMPERATURE", 0.8))
