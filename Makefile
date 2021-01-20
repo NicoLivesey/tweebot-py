@@ -53,10 +53,13 @@ download-model: ## download model repository for finetuning
 
 
 init: ## setup the dev enviroment
+	@echo "Installing requirements"
 	make install-dev
+	@echo "Setting up environment"
 	make setup-env
+	@echo "Downloading pretrained models"
 	make download-model
-	make help
+	@echo "Initialisation finished"
 
 download:
 	python tweebot_py/setup/twitter.py $(call args,rizdindebanane)
