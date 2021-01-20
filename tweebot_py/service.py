@@ -3,7 +3,7 @@ import random
 import gpt_2_simple as gpt2
 
 import tweebot_py.config as cfg
-from tweebot_py.utils import log
+from tweebot_py.log import log
 
 
 sess = gpt2.start_tf_sess()
@@ -11,7 +11,7 @@ sess = gpt2.start_tf_sess()
 
 @log("Model loading")
 def load_model():
-    gpt2.load_gpt2(sess, run_name=cfg.DEFAUT_MODEL, checkpoint_dir=cfg.MODEL_DIR)
+    gpt2.load_gpt2(sess, run_name=cfg.DEFAULT_MODEL, checkpoint_dir=cfg.MODEL_DIR)
 
 
 def _split(text):

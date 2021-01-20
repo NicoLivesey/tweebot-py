@@ -1,6 +1,11 @@
 data/
 models/
+build/
+dist/
+*egg-info*
 nbs/samples/
 __pycache__/
+*.ipynb
 .ipynb_checkpoints
 .vscode
+.pytest_cache/

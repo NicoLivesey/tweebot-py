@@ -1,8 +1,9 @@
+import uuid
+import uvicorn
 from fastapi import FastAPI
 from loguru import logger
-import uvicorn
-import uuid
 
+from tweebot_py.log import log
 from tweebot_py.config import PROJECT_NAME, VERSION, LOG_LEVEL, PORT
 from tweebot_py.service import load_model, generate, upload
 
@@ -16,6 +17,7 @@ def startup_event():
 
 
 @app.get("/health", tags=["sanity"])
+@log("Health check")
 def health():
     return {"status_code": 200, "response": "ok"}
 
@@ -23,7 +25,8 @@ def health():
 @app.get(
     "/tweet", tags=["services"], summary="Generates bunch of tweets",
 )
-async def tweets():
+@log("Tweet generated text")
+async def tweet():
     """Generate tweets and upload them to environment user drafts"""
     with logger.contextualize(request_id=str(uuid.uuid4())):
         tweets = generate()

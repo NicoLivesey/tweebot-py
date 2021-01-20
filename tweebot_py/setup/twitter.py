@@ -24,6 +24,8 @@ def _clean(txt):
 
 
 def _download_tweets(api, name):
+    path = Path(cfg.DATA_DIR) / name
+    path.mkdir(exist_ok=True)
     for tweet in tqdm(
         tweepy.Cursor(
             api.user_timeline,
@@ -34,7 +36,7 @@ def _download_tweets(api, name):
         ).items()
     ):
         if tweet:
-            with open(Path(cfg.DATA_DIR) / "tweets.txt", "a") as f:
+            with open(path / "tweets.txt", "a") as f:
                 f.write(_clean(tweet.full_text) + cfg.SEP_WORD)
 
 
