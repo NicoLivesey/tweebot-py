@@ -45,7 +45,7 @@ install: ## install the package to the active Python's site-packages
 
 
 setup-env: ## setup environment variable
-	bash tweebot_py/setup/env.sh
+	. tweebot_py/setup/env.sh
 
 
 download-model: ## download model repository for finetuning

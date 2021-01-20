@@ -1,8 +1,8 @@
 #!/bin/sh
 
 ## Usage:
-##   . ./export-env.sh ; $COMMAND
-##   . ./export-env.sh ; echo ${MINIENTREGA_FECHALIMITE}
+##   . ./env.sh ; $COMMAND
+##   . ./env.sh ; echo ${ENV_VAR}
 
 unamestr=$(uname)
 if [ "$unamestr" = 'Linux' ]; then
