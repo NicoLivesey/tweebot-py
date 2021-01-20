@@ -29,6 +29,7 @@ def _clean(txt):
 def _download_tweets(api, name):
     path = Path(cfg.DATA_DIR) / name
     path.mkdir(exist_ok=True)
+    user = api.get_user(name)
     for tweet in tqdm(
         tweepy.Cursor(
             api.user_timeline,
@@ -36,7 +37,8 @@ def _download_tweets(api, name):
             tweet_mode="extended",
             include_rts=False,
             wait_on_rate_limit=True,
-        ).items()
+        ).items(),
+        total=user.statuses_count,
     ):
         if tweet:
             with open(path / "tweets.txt", "a") as f:

@@ -46,6 +46,7 @@ install: ## install the package to the active Python's site-packages
 
 setup-env: ## setup environment variable
 	. tweebot_py/setup/env.sh
+	python setup.py install 
 
 
 download-model: ## download model repository for finetuning
@@ -54,7 +55,7 @@ download-model: ## download model repository for finetuning
 
 init: ## setup the dev enviroment
 	@echo "Installing requirements"
-	make install-dev
+	make install
 	@echo "Setting up environment"
 	make setup-env
 	@echo "Downloading pretrained models"
