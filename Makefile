@@ -62,7 +62,13 @@ init: ## setup the dev enviroment
 	@echo "Initialisation finished"
 
 download:
-	python tweebot_py/setup/twitter.py download $(call args,rizdindebanane)
+	python tweebot_py/core/twitter.py download $(call args,rizdindebanane)
+
+train:
+	python tweebot_py/core/gpt2.py train $(call args,rizdindebanane)
+
+generate:
+	python tweebot_py/core/gpt2.py generate $(call args,rizdindebanane)
 
 
 docker-build:  ## [DEV  ] build docker image without downloading the model
