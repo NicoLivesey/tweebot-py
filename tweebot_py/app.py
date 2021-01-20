@@ -23,7 +23,9 @@ def health():
 
 
 @app.get(
-    "/tweet", tags=["services"], summary="Generates bunch of tweets",
+    "/tweet",
+    tags=["services"],
+    summary="Generates bunch of tweets",
 )
 @log("Tweet generated text")
 async def tweet():

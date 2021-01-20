@@ -4,6 +4,8 @@ DOCKER_IMAGE_PROD := ${SLUG}
 
 ENV_FILE := ".env"
 
+args = `arg="$(filter-out $@,$(MAKECMDGOALS))" && echo $${arg:-${1}}`
+
 clean: ## remove all build, test, coverage and Python artifacts
 	@rm -fr build/ dist/ .eggs/ public/
 	@find . -name '*.egg-info' -exec rm -fr {} +
@@ -42,10 +44,22 @@ install: ## install the package to the active Python's site-packages
 	pip install -r requirements/requirements_tests.txt
 
 
+setup-env: ## setup environment variable
+	bash tweebot_py/setup/env.sh
+
+
+download-model: ## download model repository for finetuning
+	bash tweebot_py/setup/model.sh
+
+
 init: ## setup the dev enviroment
 	make install-dev
-	make test
+	make setup-env
+	make download-model
 	make help
+
+download:
+	python tweebot_py/setup/twitter.py $(call args,rizdindebanane)
 
 
 docker-build:  ## [DEV  ] build docker image without downloading the model
@@ -58,3 +72,6 @@ docker-exec: ## [DEV  ] run cmd inside dev docker
 	--name ${DOCKER_IMAGE_LOCAL} \ 
 	--env-file= ${ENV_FILE} \
 	--it ${DOCKER_IMAGE_LOCAL}
+
+%:
+    @:
