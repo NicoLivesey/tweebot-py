@@ -62,7 +62,7 @@ init: ## setup the dev enviroment
 	@echo "Initialisation finished"
 
 download:
-	python tweebot_py/setup/twitter.py $(call args,rizdindebanane)
+	python tweebot_py/setup/twitter.py download $(call args,rizdindebanane)
 
 
 docker-build:  ## [DEV  ] build docker image without downloading the model
