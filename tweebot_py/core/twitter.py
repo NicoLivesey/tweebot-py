@@ -3,9 +3,11 @@ import tweepy
 from tqdm import tqdm
 from pathlib import Path
 
-import tweebot_py.config as cfg
+from tweebot_py.log import log
+from tweebot_py import config as cfg
 
 
+@log("Connect to the API")
 def _connect():
     auth = tweepy.OAuthHandler(cfg.CONSUMER_KEY, cfg.CONSUMER_SECRET)
     auth.set_access_token(cfg.ACCESS_TOKEN, cfg.ACCESS_TOKEN_SECRET)
@@ -23,6 +25,7 @@ def _clean(txt):
     )
 
 
+@log("Download tweets")
 def _download_tweets(api, name):
     path = Path(cfg.DATA_DIR) / name
     path.mkdir(exist_ok=True)

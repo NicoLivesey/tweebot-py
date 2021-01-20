@@ -2,9 +2,11 @@ import fire
 import gpt_2_simple as gpt2
 from pathlib import Path
 
+from tweebot_py.log import log
 from tweebot_py import config as cfg
 
 
+@log("GPT2 Training")
 def train(name):
     path = Path(cfg.DATA_DIR) / name
     sess = gpt2.start_tf_sess()
@@ -30,6 +32,7 @@ def train(name):
     )
 
 
+@log("Model Loading")
 def _load_model(name):
     sess = gpt2.start_tf_sess()
     gpt2.load_gpt2(
@@ -40,17 +43,22 @@ def _load_model(name):
     return sess
 
 
-def generate(name):
-    run_name = f"{name}-{cfg.PRETRAINED_MODEL}"
-    sess = _load_model(run_name)
-    text = gpt2.generate(
+@log("Fake Tweets generating")
+def _generate(sess, name):
+    gpt2.generate(
         sess,
-        run_name=run_name,
+        run_name=name,
         checkpoint_dir=cfg.MODEL_DIR,
         return_as_list=True,
         length=2000,
         temperature=cfg.TEMPERATURE,
     )[0]
+
+
+def generate(name):
+    run_name = f"{name}-{cfg.PRETRAINED_MODEL}"
+    sess = _load_model(run_name)
+    text = _generate(sess, run_name)
     text = text.split("<|endoftext|>")
     for t in text:
         print(t)
