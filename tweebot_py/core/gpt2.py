@@ -23,7 +23,7 @@ def train(name):
         print_every=10,
         learning_rate=cfg.LEARNING_RATE,
         sample_every=50,
-        sample_length=2000,
+        sample_length=1024,
         sample_num=1,
         save_every=int(
             cfg.STEPS / 4
@@ -45,12 +45,12 @@ def _load_model(name):
 
 @log("Fake Tweets generating")
 def _generate(sess, name):
-    gpt2.generate(
+    return gpt2.generate(
         sess,
         run_name=name,
         checkpoint_dir=cfg.MODEL_DIR,
         return_as_list=True,
-        length=2000,
+        length=2048,
         temperature=cfg.TEMPERATURE,
     )[0]
 
